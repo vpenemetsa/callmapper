@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/FamilyButtonBM" android:text="Family"></Button>
+<Button android:layout_below="@+id/FamilyButtonBM" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/FriendsButtonBM" android:text="Friends"></Button>
+<Button android:layout_below="@+id/FriendsButtonBM" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Work" android:id="@+id/WorkButtonBM"></Button>
+<Button android:layout_below="@+id/WorkButtonBM" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/OthersButtonBM" android:text="Others"></Button>
+...
+</RelativeLayout>

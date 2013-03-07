@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout 
+    android:id="@+id/RelativeLayout01" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    	<Button 
+			android:id="@+id/family"
+    	    android:layout_width="match_parent" 
+    	    android:layout_height="wrap_content" 
+    	    android:text="Family" />
+    	
+		<Button 
+			android:id="@+id/friends"
+		    android:layout_height="wrap_content" 
+		    android:layout_width="match_parent" 
+		    android:text="Friends" />
+		
+		<Button 
+		    android:id="@+id/work"
+		    android:layout_height="wrap_content" 
+		    android:layout_width="match_parent" 
+		    android:text="Work" />
+		
+		<Button 
+			android:id="@+id/others"
+		    android:layout_height="wrap_content" 
+		    android:layout_width="match_parent" 
+		    android:text="Others" />
+		
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/images">
+    >
+<TextView  
+    android:text="PUMa" 
+    android:gravity="center" 
+    android:padding="15dp" 
+    android:layout_height="wrap_content" 
+    android:layout_width="match_parent" 
+    android:textSize="40sp"/>
+   ... 
+<Button 
+	android:text="Callloglist" 
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent" 
+	android:textSize="40sp" 
+	android:onClick="onClick()" android:id="@+id/CallLogListButton"></Button>
+
+<Button 
+	android:layout_height="wrap_content" 
+	android:text="Bookmarks" 
+	android:textSize="40sp" 
+	android:layout_width="fill_parent" android:id="@+id/BookmarksButton"></Button>
+
+
+</LinearLayout>

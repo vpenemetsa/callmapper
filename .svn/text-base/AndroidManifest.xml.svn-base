@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.PUMa" android:versionCode="1" android:versionName="1.0">
+	<application android:icon="@drawable/puma" android:label="@string/app_name">
+
+
+		<activity android:name=".PUMa" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				
+				<category android:name="android.intent.category.LAUNCHER" />
+				
+			</intent-filter>
+		</activity>
+
+		<activity android:name=".callloglist" android:label="@string/seconds"></activity>
+
+		<activity android:name=".bookmarklist" android:label="@string/third">
+		</activity>
+		<activity android:name=".groupcl"></activity>
+		<activity android:name=".groupbm"></activity>
+		<activity android:name=".viewmapbm"></activity>
+
+		<service android:enabled="true" android:name=".telephonyservices">
+			<intent-filter>
+				<action android:value="com.PUMa.TELEPHONYSERVICES"
+					android:name=".telephonyservices" />
+			</intent-filter>
+		</service>
+
+		...
+
+		<service android:enabled="true" android:name=".getgpscoords">
+			<intent-filter>
+				<action android:value="com.PUMa.GETGPSCOORDS" 
+					android:name=".getgpscoords" />
+			</intent-filter>
+		</service>
+		...
+
+		<uses-library android:name="com.google.android.maps" />
+
+		<activity android:name=".viewmap" android:label="@string/maps"
+			android:theme="@android:style/Theme.NoTitleBar">
+		</activity>
+		
+		<receiver android:name="com.PUMa.OutgoingCallReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+			</intent-filter>
+		</receiver>
+
+		<receiver android:name="com.PUMa.IncomingCallReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.PHONE_STATE"/>
+			</intent-filter>
+		</receiver>
+
+	</application>
+
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+	<uses-sdk android:minSdkVersion="8" />
+
+</manifest> 

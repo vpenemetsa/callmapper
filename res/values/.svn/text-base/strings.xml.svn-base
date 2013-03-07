@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="seconds">Welcome to Call log</string>
+    <string name="app_name">PUM</string>
+<string name="third">Welcome to book mark</string>
+<string name="hello">Maps!</string>
+<string name="maps">Google Maps!</string>
+ <string name="mapskey">YOUR API KEY</string>
+  <string-array name="countries_array">
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+    </string-array>
+ 
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="seconds">Call log</string>
+    <string name="app_name">Call Mapper</string>
+<string name="third">Bookmarks</string>
+<string name="hello">Maps!</string>
+<string name="maps">Google Maps!</string>
+ <string name="mapskey">YOUR API KEY</string>
+  <string-array name="countries_array">
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+    </string-array>
+ 
+</resources>
