@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.CallMapper" android:versionCode="2" android:versionName="1.1">
+	package="com.CallMapper" android:versionCode="3" android:versionName="1.2">
 	
     <uses-sdk
         android:minSdkVersion="11"
@@ -11,6 +11,9 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.READ_SMS" />
+	<uses-permission android:name="android.permission.READ_CONTACTS" />
     
 	<application
 	    android:icon="@drawable/maps" 
@@ -28,8 +31,12 @@
 		</activity>
 
 		<activity 
-		    android:name="com.CallMapper.CallLogList" 
+		    android:name="com.CallMapper.activity.CallLogList" 
 		    android:label="@string/seconds" />
+		
+		<activity 
+		    android:name="com.CallMapper.activity.TextLogList" 
+		    android:label="@string/text_log" />
 
 		<activity 
 		    android:name="com.CallMapper.BookmarkList" 
@@ -39,25 +46,38 @@
 		    android:name="com.CallMapper.GroupCl" />
 		
 		<activity 
-		    android:name="com.CallMapper.GroupBm" />
+		    android:name="com.CallMapper.activity.GroupBm" />
 		
 		<uses-library android:name="com.google.android.maps" />
 
 		<activity 
-		    android:name="com.CallMapper.LogMapActivity" 
+		    android:name="com.CallMapper.activity.LogMapActivity" 
 		    android:label="@string/maps"
 			android:theme="@android:style/Theme.NoTitleBar" />
 		
-		<receiver android:name="com.CallMapper.OutgoingCallReceiver">
+		<receiver android:name="com.CallMapper.receivers.OutgoingCallReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
 			</intent-filter>
 		</receiver>
-
-		<receiver android:name="com.CallMapper.IncomingCallReceiver">
+		
+		<receiver android:name="com.CallMapper.receivers.IncomingCallReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.PHONE_STATE"/>
 			</intent-filter>
+		</receiver>
+		
+		<receiver android:name="com.CallMapper.receivers.IncomingSmsListener">
+		    <intent-filter>
+		        <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+		    </intent-filter>
+		</receiver>
+		
+		<receiver android:name="com.CallMapper.receivers.OutgoingSmsListener"
+		    android:exported="false" >
+		    <intent-filter>
+		        <action android:name="action_sms_sent" />
+		    </intent-filter>
 		</receiver>
 			
 	</application>

@@ -10,11 +10,18 @@ public class Constants {
 	public static final String EXTRA_VIEW_BY_GROUPS = "EXTRA_VIEW_BY_GROUPS";
 	public static final String EXTRA_CALL_LOG = "EXTRA_CALL_LOG";
 	public static final String EXTRA_CALL_LOG_BY_GROUP = "EXTRA_CALL_LOG_BY_GROUP";
+	public static final String EXTRA_TEXT_LOG_FLAG = "EXTRA_TEXT_LOG_FLAG";
+	public static final String EXTRA_TEXT_LOG = "EXTRA_TEXT_LOG";
+	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	
 	public static final String GROUP_FAMILY = "family";
 	public static final String GROUP_FRIENDS = "friends";
 	public static final String GROUP_WORK = "work";
 	public static final String GROUP_OTHERS = "others";
 	
+	public static final String CALL = "call";
+	public static final String TEXT = "text";
+	
+	public static final String ACTION_SMS_SENT = "action_sms_sent";
 	
 }

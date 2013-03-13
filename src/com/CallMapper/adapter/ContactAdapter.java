@@ -3,6 +3,9 @@ package com.CallMapper.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +41,19 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 			convertView = mLayoutInflater.inflate(android.R.layout.simple_list_item_checked, parent, false);
 			
 			final CheckedTextView number = (CheckedTextView) convertView.findViewById(android.R.id.text1);
-			number.setText(item.getPhoneNumber());
 			
+			String[] projection = new String[] {
+			        ContactsContract.PhoneLookup.DISPLAY_NAME};
+			
+			Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(item.getPhoneNumber()));
+			Cursor cursor = mContext.getContentResolver().query(contactUri, projection, null, null, null);
+			
+			if (cursor.moveToFirst()) {
+				String name = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+				number.setText(name + " (" + item.getPhoneNumber() + ")");
+			} else {
+				number.setText(item.getPhoneNumber());
+			}
 		}
 		
 		return convertView;

@@ -32,15 +32,16 @@ public final class R {
         public static final int ViewMapButtonCLL=0x7f060006;
         public static final int button_select_all=0x7f060003;
         public static final int call_logs=0x7f06000e;
-        public static final int checkbox=0x7f060012;
+        public static final int checkbox=0x7f060013;
         public static final int family=0x7f060007;
         public static final int friends=0x7f060008;
         public static final int group=0x7f060005;
-        public static final int groups=0x7f06000f;
+        public static final int groups=0x7f060010;
         public static final int list=0x7f06000d;
-        public static final int mapview=0x7f060010;
-        public static final int number=0x7f060011;
+        public static final int mapview=0x7f060011;
+        public static final int number=0x7f060012;
         public static final int others=0x7f06000a;
+        public static final int text_logs=0x7f06000f;
         public static final int view_map=0x7f060004;
         public static final int work=0x7f060009;
     }
@@ -55,11 +56,12 @@ public final class R {
         public static final int row_call=0x7f030007;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040003;
-        public static final int maps=0x7f040004;
-        public static final int mapskey=0x7f040005;
+        public static final int app_name=0x7f040002;
+        public static final int hello=0x7f040004;
+        public static final int maps=0x7f040005;
+        public static final int mapskey=0x7f040006;
         public static final int seconds=0x7f040000;
-        public static final int third=0x7f040002;
+        public static final int text_log=0x7f040001;
+        public static final int third=0x7f040003;
     }
 }

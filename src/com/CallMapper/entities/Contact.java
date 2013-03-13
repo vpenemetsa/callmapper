@@ -11,6 +11,12 @@ public class Contact {
 	
 	private String group;
 	
+	private String message;
+	
+	private String type;
+	
+	private String timestamp;
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -44,5 +50,26 @@ public class Contact {
 	}
 	public void setGroup(String group) {
 		this.group = group;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getTimeStamp() {
+		return timestamp;
+	}
+	public void setTimeStamp(String ts) {
+		this.timestamp = ts;
 	}
 }

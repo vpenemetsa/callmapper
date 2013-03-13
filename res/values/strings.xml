@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="seconds">Call log</string>
+    <string name="text_log">Text log</string>
     <string name="app_name">Call Mapper</string>
 <string name="third">Bookmarks</string>
 <string name="hello">Maps!</string>
