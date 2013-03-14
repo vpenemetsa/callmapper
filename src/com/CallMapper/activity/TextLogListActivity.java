@@ -3,7 +3,9 @@ package com.CallMapper.activity;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +20,7 @@ import com.CallMapper.R;
 import com.CallMapper.adapter.ContactAdapter;
 import com.CallMapper.database.DatabaseControl;
 import com.CallMapper.entities.Contact;
+import com.CallMapper.loaders.DataLoader;
 
 /**
  * List activity to display text message list
@@ -25,7 +28,7 @@ import com.CallMapper.entities.Contact;
  * @author vpenemetsa
  *
  */
-public class TextLogListActivity extends ListActivity implements OnClickListener {
+public class TextLogListActivity extends ListActivity implements LoaderCallbacks<ArrayList<Contact>> {
 	Button mButtonViewMap, mButtonGroup;
 
 	ListView list;
@@ -33,6 +36,10 @@ public class TextLogListActivity extends ListActivity implements OnClickListener
 	static boolean[] selections;
 	ArrayList<Integer> selects = new ArrayList<Integer>();
 	static int checkedCount = 0;
+	
+	private static final int LOADER_LIST = 1;
+	
+	ContactAdapter contactAdapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,28 +50,70 @@ public class TextLogListActivity extends ListActivity implements OnClickListener
 		View cll = getLayoutInflater().inflate(R.layout.list_header, list, false);
 		getListView().addHeaderView(cll, null, true);
 		
-		DatabaseControl dbControl = new DatabaseControl(getApplicationContext());
-		
 		mButtonViewMap = (Button) cll.findViewById(R.id.view_map);
 		mButtonGroup = (Button) cll.findViewById(R.id.group);
+		setButtonInteractions();
 		
-		ArrayList<Contact> items = new ArrayList<Contact>();
+		contactAdapter = new ContactAdapter(getApplicationContext(), 0, getLayoutInflater());
+		getListView().setAdapter(contactAdapter);
 		
-		Intent bundle = getIntent();
-		if (bundle.getStringExtra(Constants.EXTRA_TEXT_LOG_FLAG).equals(Constants.EXTRA_TEXT_LOG)) {
-			mButtonViewMap.setOnClickListener(this);
-			mButtonGroup.setOnClickListener(this);
-			items = dbControl.getContacts(Constants.TEXT);
-		} else {
-			mButtonGroup.setVisibility(View.GONE);
-			mButtonViewMap.setOnClickListener(this);
-			items = dbControl.getContactsByGroup(bundle.getStringExtra(Constants.EXTRA_GROUP_NAME));
-		}
+		getLoaderManager().initLoader(LOADER_LIST, createLoaderBundle(), this);
+	}
+	
+	protected Bundle createLoaderBundle() {
+		Bundle b = new Bundle();
+		b.putSerializable(Constants.LOADER_ACTION, Constants.LOADER_TEXT_ACTION);
+		return b;
+	}
+	
+	@Override
+	public Loader<ArrayList<Contact>> onCreateLoader(int id, Bundle args) {
+		return new DataLoader(getApplicationContext(),new DatabaseControl(getApplicationContext()), args);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<ArrayList<Contact>> loader, ArrayList<Contact> data) {
+		contactAdapter.setData(data);
+	}
+
+	@Override
+	public void onLoaderReset(Loader<ArrayList<Contact>> loader) {
+		contactAdapter.setData(null);
+	}
+	
+	private void setButtonInteractions() {
 		
-		ContactAdapter ca = new ContactAdapter(getApplicationContext(), 0, getLayoutInflater());
-		ca.addAll(items);
-		
-		getListView().setAdapter(ca);
+		mButtonViewMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ArrayList<String> phNumbers = new ArrayList<String>();
+				 
+				for (int position : selects) {
+					Contact contact = (Contact) getListView().getItemAtPosition(position);
+					phNumbers.add(contact.getPhoneNumber());
+				}
+				 
+				Intent i = new Intent(getApplicationContext(), LogMapActivity.class);
+				i.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phNumbers);
+				startActivity(i);
+			}
+		});
+		mButtonGroup.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ArrayList<String> phoneNumbers = new ArrayList<String>();
+				 
+				 for (int position : selects) {
+					 Contact contact = (Contact) getListView().getItemAtPosition(position);
+					 phoneNumbers.add(contact.getPhoneNumber());
+				 }
+				 
+				 Intent i=new Intent(getApplicationContext(),GroupActivity.class);
+				 i.putExtra(Constants.EXTRA_GROUP_FLAG, Constants.EXTRA_SAVE_GROUPS);
+				 i.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phoneNumbers);
+				 startActivity(i);
+			}
+		});
 		
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -93,39 +142,5 @@ public class TextLogListActivity extends ListActivity implements OnClickListener
 				}
 			}
 		});
-		
-	}
-
-	public void onClick(View ss) {
-		switch (ss.getId()) {
-			case R.id.view_map:
-				ArrayList<String> phNumbers = new ArrayList<String>();
-				 
-				 for (int position : selects) {
-					 Contact contact = (Contact) getListView().getItemAtPosition(position);
-					 phNumbers.add(contact.getPhoneNumber());
-				 }
-				 
-				Intent i = new Intent(getApplicationContext(), LogMapActivity.class);
-				i.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phNumbers);
-				startActivity(i);
-				break;
-				
-			 case R.id.group:
-				 ArrayList<String> phoneNumbers = new ArrayList<String>();
-				 
-				 for (int position : selects) {
-					 Contact contact = (Contact) getListView().getItemAtPosition(position);
-					 phoneNumbers.add(contact.getPhoneNumber());
-				 }
-				 
-				 Intent i1=new Intent(this,GroupActivity.class);
-				 i1.putExtra(Constants.EXTRA_GROUP_FLAG, Constants.EXTRA_SAVE_GROUPS);
-				 i1.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phoneNumbers);
-				 startActivity(i1); 
-				 break;
-		 
-		
-		}
 	}
 }

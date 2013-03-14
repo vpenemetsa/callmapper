@@ -14,7 +14,7 @@ import com.CallMapper.R;
 import com.CallMapper.database.DatabaseControl;
 
 /**
- * This activity handles the group functionality 
+ * This activity handles groups
  * 
  * @author vpenemetsa
  *

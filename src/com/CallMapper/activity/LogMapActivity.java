@@ -2,7 +2,8 @@ package com.CallMapper.activity;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.CallMapper.Constants;
 import com.CallMapper.R;
 import com.CallMapper.database.DatabaseControl;
 import com.CallMapper.entities.Contact;
+import com.CallMapper.loaders.DataLoader;
 import com.CallMapper.map.MapItemizedOverlay;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -23,9 +25,11 @@ import com.google.android.maps.OverlayItem;
  * @author vpenemetsa
  *
  */
-public class LogMapActivity extends MapActivity {
+public class LogMapActivity extends MapActivity implements LoaderCallbacks<ArrayList<Contact>> {
 
-	ArrayList<Contact> contacts = new ArrayList<Contact>();
+	ArrayList<String> phoneNumbers = new ArrayList<String>();
+	MapView mMapView;
+	MapItemizedOverlay mItemizedOverlay;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,22 +37,40 @@ public class LogMapActivity extends MapActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
         
-        MapView mapView = (MapView) findViewById(R.id.mapview);
-        MapItemizedOverlay itemizedOverlay;
+        mMapView = (MapView) findViewById(R.id.mapview);
         
-        Intent bundle = getIntent();
-        ArrayList<String> phoneNumbers = bundle.getStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS);
+        phoneNumbers = getIntent().getStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS);
         
-        contacts = DatabaseControl.getContactsFromPhoneNumbers(phoneNumbers);
-        ArrayList<GeoPoint> points = new ArrayList<GeoPoint>();
-        
-        for (Contact contact : contacts) {
+        getLoaderManager().initLoader(1, createLoaderBundle(), this);
+	}
+	
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
+	}
+	
+	protected Bundle createLoaderBundle() {
+		Bundle b = new Bundle();
+		b.putSerializable(Constants.LOADER_ACTION, Constants.LOADER_MAP_ACTION);
+		b.putStringArrayList(Constants.EXTRA_PHONE_NUMBERS, phoneNumbers);
+		return b;
+	}
+
+	@Override
+	public Loader<ArrayList<Contact>> onCreateLoader(int id, Bundle args) {
+		return new DataLoader(getApplicationContext(), new DatabaseControl(getApplicationContext()), args);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<ArrayList<Contact>> loader, ArrayList<Contact> data) {
+		ArrayList<GeoPoint> points = new ArrayList<GeoPoint>();
+		for (Contact contact : data) {
         	double latitude = Double.parseDouble(contact.getLatitude());
         	double longitude = Double.parseDouble(contact.getLongitude());
         	
 			GeoPoint point = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 			points.add(point);
-			MapController controller = mapView.getController();
+			MapController controller = mMapView.getController();
 
 			//animate to the desired point
 	        controller.animateTo(point);
@@ -71,17 +93,16 @@ public class LogMapActivity extends MapActivity {
 	        
 	        OverlayItem overlayItem = new OverlayItem(point, "", "");
 
-	        itemizedOverlay = new MapItemizedOverlay(drawable,this);
-	        itemizedOverlay.addOverlay(overlayItem);
+	        mItemizedOverlay = new MapItemizedOverlay(drawable,this);
+	        mItemizedOverlay.addOverlay(overlayItem);
 
-	        mapView.getOverlays().add(itemizedOverlay);
+	        mMapView.getOverlays().add(mItemizedOverlay);
 	        
-	        mapView.invalidate();
+	        mMapView.invalidate();
 		}
 	}
-	
+
 	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
+	public void onLoaderReset(Loader<ArrayList<Contact>> loader) {
 	}
 }

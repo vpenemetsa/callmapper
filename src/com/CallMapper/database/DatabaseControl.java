@@ -288,7 +288,7 @@ public class DatabaseControl {
 		return phone_array;
 	}
 	
-	public static ArrayList<Contact> getContactsFromPhoneNumbers(ArrayList<String> phoneNumbers) {
+	public ArrayList<Contact> getContactsFromPhoneNumbers(ArrayList<String> phoneNumbers) {
 		CustomSQLiteOpenHelper helper = new CustomSQLiteOpenHelper(mContext);
 		SQLiteDatabase pum = helper.getReadableDatabase();
 		

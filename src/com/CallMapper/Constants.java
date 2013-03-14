@@ -1,5 +1,7 @@
 package com.CallMapper;
 
+import java.io.Serializable;
+
 /**
  * Constants used throughout the application
  * 
@@ -45,5 +47,9 @@ public class Constants {
 	public static final String ACTION_SMS_SENT = "action_sms_sent";
 	public static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 	public static final String ACTION_OUTGOING_CALL = "android.intent.action.NEW_OUTGOING_CALL";
+
+	public static final String LOADER_ACTION = "loader_action";
+	public static final Serializable LOADER_TEXT_ACTION = "loader_text_action";
+	public static final Serializable LOADER_MAP_ACTION = "loader_map_action";
 	
 }
