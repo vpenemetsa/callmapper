@@ -2,7 +2,7 @@ package com.CallMapper.activity;
 
 import java.util.ArrayList;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
 import android.content.Loader;
@@ -28,7 +28,7 @@ import com.CallMapper.loaders.DataLoader;
  * @author vpenemetsa
  *
  */
-public class TextLogListActivity extends ListActivity implements LoaderCallbacks<ArrayList<Contact>> {
+public class TextLogListActivity extends Activity implements LoaderCallbacks<ArrayList<Contact>> {
 	Button mButtonViewMap, mButtonGroup;
 
 	ListView list;
@@ -45,17 +45,17 @@ public class TextLogListActivity extends ListActivity implements LoaderCallbacks
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.list_view);
 		
-		list = getListView();
-		View cll = getLayoutInflater().inflate(R.layout.list_header, list, false);
-		getListView().addHeaderView(cll, null, true);
+		list = (ListView) findViewById(R.id.content_list);
 		
-		mButtonViewMap = (Button) cll.findViewById(R.id.view_map);
-		mButtonGroup = (Button) cll.findViewById(R.id.group);
+		mButtonViewMap = (Button) findViewById(R.id.view_map);
+		mButtonGroup = (Button) findViewById(R.id.group);
+		
 		setButtonInteractions();
 		
 		contactAdapter = new ContactAdapter(getApplicationContext(), 0, getLayoutInflater());
-		getListView().setAdapter(contactAdapter);
+		list.setAdapter(contactAdapter);
 		
 		getLoaderManager().initLoader(LOADER_LIST, createLoaderBundle(), this);
 	}
@@ -64,6 +64,12 @@ public class TextLogListActivity extends ListActivity implements LoaderCallbacks
 		Bundle b = new Bundle();
 		b.putSerializable(Constants.LOADER_ACTION, Constants.LOADER_TEXT_ACTION);
 		return b;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		getLoaderManager().restartLoader(LOADER_LIST, createLoaderBundle(), this);
 	}
 	
 	@Override
@@ -89,7 +95,7 @@ public class TextLogListActivity extends ListActivity implements LoaderCallbacks
 				ArrayList<String> phNumbers = new ArrayList<String>();
 				 
 				for (int position : selects) {
-					Contact contact = (Contact) getListView().getItemAtPosition(position);
+					Contact contact = (Contact) list.getItemAtPosition(position);
 					phNumbers.add(contact.getPhoneNumber());
 				}
 				 
@@ -104,7 +110,7 @@ public class TextLogListActivity extends ListActivity implements LoaderCallbacks
 				ArrayList<String> phoneNumbers = new ArrayList<String>();
 				 
 				 for (int position : selects) {
-					 Contact contact = (Contact) getListView().getItemAtPosition(position);
+					 Contact contact = (Contact) list.getItemAtPosition(position);
 					 phoneNumbers.add(contact.getPhoneNumber());
 				 }
 				 
@@ -115,7 +121,7 @@ public class TextLogListActivity extends ListActivity implements LoaderCallbacks
 			}
 		});
 		
-		getListView().setOnItemClickListener(new OnItemClickListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				CheckedTextView ctv = (CheckedTextView) view;

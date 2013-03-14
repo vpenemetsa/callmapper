@@ -6,7 +6,8 @@
 	android:orientation="horizontal"
 	android:padding="10dp"
 	style="?android:attr/buttonBarStyle"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="top" >
 	
 	<Button 
 		android:id="@+id/view_map" 

@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent" 
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 	
+    <LinearLayout 
+		android:id="@+id/header" 
+		android:layout_width="match_parent" 
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="10dp"
+		style="?android:attr/buttonBarStyle"
+		android:gravity="top" >
+		
+		<Button 
+			android:id="@+id/view_map" 
+			android:layout_width="0dip"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/button_view_map"
+			style="?android:attr/buttonBarButtonStyle"
+			android:enabled="false" >
+		</Button>
+		
+		<Button
+			android:id="@+id/group"
+			android:layout_width="0dip" 
+			android:layout_height="wrap_content" 
+			android:layout_weight="1"
+			android:text="@string/button_group"
+			style="?android:attr/buttonBarButtonStyle"
+			android:enabled="false" >
+		</Button>
+		
+		<!-- <Button
+		    android:id="@+id/select_all"
+		    android:layout_height="wrap_content"
+		    android:layout_width="0dip"
+		    android:layout_weight="1"
+		    android:text="Select All" /> -->
+		
+	</LinearLayout>
+    
 	<ListView 
-	    android:id="@+id/list" 
+	    android:id="@+id/content_list"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" />
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/header" />
 	
-</LinearLayout>
+</RelativeLayout>
 

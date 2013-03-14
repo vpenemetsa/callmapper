@@ -4,7 +4,7 @@
     <string name="text_log">Text log</string>
     <string name="app_name">Call Mapper</string>
     
-    <string name="main_sub_text">View Logs of your calls on a Map!</string>
+    <string name="main_sub_text">View Logs of your calls and messages on a Map!</string>
     
     <string name="button_call_history">Call History</string>
     <string name="button_text_history">Text History</string>

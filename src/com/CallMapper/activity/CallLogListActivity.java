@@ -2,7 +2,7 @@ package com.CallMapper.activity;
 
 import java.util.ArrayList;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
 import android.content.Loader;
@@ -29,7 +29,7 @@ import com.CallMapper.loaders.DataLoader;
  * @author vpenemetsa
  *
  */
-public class CallLogListActivity extends ListActivity implements LoaderCallbacks<ArrayList<Contact>>{
+public class CallLogListActivity extends Activity implements LoaderCallbacks<ArrayList<Contact>>{
 	
 	Button mButtonViewMap, mButtonGroup;
 	
@@ -48,16 +48,15 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.list_view);
 		
-		list = getListView();
-		View cll = getLayoutInflater().inflate(R.layout.list_header, list, false);
-		getListView().addHeaderView(cll, null, true);
+		list = (ListView) findViewById(R.id.content_list);
 		
 		contactAdapter = new ContactAdapter(getApplicationContext(), 0, getLayoutInflater());
-		getListView().setAdapter(contactAdapter);
+		list.setAdapter(contactAdapter);
 		
-		mButtonViewMap = (Button) cll.findViewById(R.id.view_map);
-		mButtonGroup = (Button) cll.findViewById(R.id.group);
+		mButtonViewMap = (Button) findViewById(R.id.view_map);
+		mButtonGroup = (Button) findViewById(R.id.group);
 		
 		if (getIntent().getStringExtra(Constants.EXTRA_CALL_LOG_FLAG).equals(Constants.EXTRA_CALL_LOG)) {
 			action = Constants.EXTRA_CALL_LOG;
@@ -76,15 +75,21 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		getLoaderManager().restartLoader(LOADER_LIST, createLoaderBundle(), this);
+	}
+	
+	@Override
 	public Loader<ArrayList<Contact>> onCreateLoader(int id, Bundle args) {
 		return new DataLoader(getApplicationContext(), new DatabaseControl(getApplicationContext()), args);
 	}
-
+	
 	@Override
 	public void onLoadFinished(Loader<ArrayList<Contact>> loader, ArrayList<Contact> data) {
 		contactAdapter.setData(data);
 	}
-
+	
 	@Override
 	public void onLoaderReset(Loader<ArrayList<Contact>> loader) {
 		contactAdapter.setData(null);
@@ -99,7 +104,7 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 					ArrayList<String> phNumbers = new ArrayList<String>();
 					 
 					 for (int position : selects) {
-						 Contact contact = (Contact) getListView().getItemAtPosition(position);
+						 Contact contact = (Contact) list.getItemAtPosition(position);
 						 phNumbers.add(contact.getPhoneNumber());
 					 }
 					 
@@ -114,7 +119,7 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 					ArrayList<String> phoneNumbers = new ArrayList<String>();
 					 
 					 for (int position : selects) {
-						 Contact contact = (Contact) getListView().getItemAtPosition(position);
+						 Contact contact = (Contact) list.getItemAtPosition(position);
 						 phoneNumbers.add(contact.getPhoneNumber());
 					 }
 					 
@@ -132,7 +137,7 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 					ArrayList<String> phoneNumbers = new ArrayList<String>();
 					 
 					 for (int position : selects) {
-						 Contact contact = (Contact) getListView().getItemAtPosition(position);
+						 Contact contact = (Contact) list.getItemAtPosition(position);
 						 phoneNumbers.add(contact.getPhoneNumber());
 					 }
 					 
@@ -144,7 +149,7 @@ public class CallLogListActivity extends ListActivity implements LoaderCallbacks
 			});
 		}
 		
-		getListView().setOnItemClickListener(new OnItemClickListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				CheckedTextView ctv = (CheckedTextView) view;
