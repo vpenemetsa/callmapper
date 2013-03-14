@@ -10,6 +10,12 @@ import com.CallMapper.Constants;
 import com.CallMapper.database.DatabaseControl;
 import com.CallMapper.entities.Contact;
 
+/**
+ * Loader used by all activities to load data from the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class DataLoader extends AsyncTaskLoader<ArrayList<Contact>>{
 
 	Context mContext;
