@@ -1,5 +1,6 @@
 package com.CallMapper.receivers;
 
+import com.CallMapper.Constants;
 import com.CallMapper.database.DatabaseControl;
 
 import android.content.BroadcastReceiver;
@@ -13,6 +14,12 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+/**
+ * Listens for incoming messages and saves them to the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class IncomingSmsListener extends BroadcastReceiver {
 
 	Context mContext;
@@ -24,13 +31,13 @@ public class IncomingSmsListener extends BroadcastReceiver {
 		Bundle bundle = intent.getExtras();
         mContext = context;
         
-        if(intent.getAction().equalsIgnoreCase("android.provider.Telephony.SMS_RECEIVED")) {
+        if(intent.getAction().equalsIgnoreCase(Constants.ACTION_SMS_RECEIVED)) {
         	SmsMessage[] msgs = null;
             String phoneNumber = null;
             String message = null;
             if (bundle != null){
             	try{
-                    Object[] pdus = (Object[]) bundle.get("pdus");
+                    Object[] pdus = (Object[]) bundle.get(Constants.EXTRA_SMS_PDUS);
                     msgs = new SmsMessage[pdus.length];
                     for(int i=0; i<msgs.length; i++){
                         msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
@@ -78,8 +85,8 @@ public class IncomingSmsListener extends BroadcastReceiver {
     		};
             
     		mLocationManager.requestLocationUpdates(provider,
-                    60000, // 1min
-                    500,   // 0.5km
+                    Constants.EXTRA_MIN_TIME,
+                    Constants.EXTRA_MIN_DISTANCE,
                     mListener);
         }
 

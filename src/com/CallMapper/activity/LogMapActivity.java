@@ -10,13 +10,19 @@ import com.CallMapper.Constants;
 import com.CallMapper.R;
 import com.CallMapper.database.DatabaseControl;
 import com.CallMapper.entities.Contact;
-import com.CallMapper.map.CallLogItemizedOverlay;
+import com.CallMapper.map.MapItemizedOverlay;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
+/**
+ * This activity handles the map view
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class LogMapActivity extends MapActivity {
 
 	ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -28,7 +34,7 @@ public class LogMapActivity extends MapActivity {
         setContentView(R.layout.map);
         
         MapView mapView = (MapView) findViewById(R.id.mapview);
-        CallLogItemizedOverlay itemizedOverlay;
+        MapItemizedOverlay itemizedOverlay;
         
         Intent bundle = getIntent();
         ArrayList<String> phoneNumbers = bundle.getStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS);
@@ -47,8 +53,6 @@ public class LogMapActivity extends MapActivity {
 			//animate to the desired point
 	        controller.animateTo(point);
 
-	        //set the map zoom to 13
-	        // zoom 1 is top world view
 	        controller.setZoom(4);
 	        
 	        Drawable drawable;
@@ -65,27 +69,19 @@ public class LogMapActivity extends MapActivity {
 	        	drawable = this.getResources().getDrawable(R.drawable.pink);
 	        }
 	        
-
-	        // create and add an OverlayItem to the MyItemizedOverlay list
 	        OverlayItem overlayItem = new OverlayItem(point, "", "");
 
-	        itemizedOverlay = new CallLogItemizedOverlay(drawable,this);
+	        itemizedOverlay = new MapItemizedOverlay(drawable,this);
 	        itemizedOverlay.addOverlay(overlayItem);
 
-	        // add the overlays to the map
 	        mapView.getOverlays().add(itemizedOverlay);
 	        
-	        //invalidate the map in order to show changes
 	        mapView.invalidate();
 		}
-        
-        
-        
-    }
+	}
 	
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
-
 }

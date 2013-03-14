@@ -10,11 +10,17 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
-public class CallLogItemizedOverlay extends ItemizedOverlay<OverlayItem> {
+/**
+ * Creates overlay items for the map
+ * 
+ * @author vpenemetsa
+ *
+ */
+public class MapItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 	
-	public CallLogItemizedOverlay(Drawable defaultMarker, Context context) {
+	public MapItemizedOverlay(Drawable defaultMarker, Context context) {
 		super(boundCenterBottom(defaultMarker));
 	}
 	

@@ -14,6 +14,12 @@ import android.widget.CheckedTextView;
 
 import com.CallMapper.entities.Contact;
 
+/**
+ * This adapter set the view for each element in the listview 
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class ContactAdapter extends ArrayAdapter<Contact> {
 	
 	Context mContext;

@@ -1,5 +1,6 @@
 package com.CallMapper.receivers;
 
+import com.CallMapper.Constants;
 import com.CallMapper.database.DatabaseControl;
 
 import android.content.BroadcastReceiver;
@@ -11,6 +12,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * Listens for outgoing calls and saves them to the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class OutgoingCallReceiver extends BroadcastReceiver {
 	
 	Context mContext;
@@ -25,7 +32,7 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
         if(null == bundle)
             return;
         
-        if (intent.getAction().equals("android.intent.action.NEW_OUTGOING_CALL")) {
+        if (intent.getAction().equals(Constants.ACTION_OUTGOING_CALL)) {
         	final String phonenumber = bundle.getString(Intent.EXTRA_PHONE_NUMBER);
             
             mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -62,8 +69,8 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
     		};
             
     		mLocationManager.requestLocationUpdates(provider,
-                    60000, // 1min
-                    1000,   // 0.5km
+                    Constants.EXTRA_MIN_TIME,
+                    Constants.EXTRA_MIN_DISTANCE,
                     mListener);
         }
     }

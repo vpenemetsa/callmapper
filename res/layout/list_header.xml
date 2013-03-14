@@ -5,25 +5,27 @@
 	android:layout_height="wrap_content"
 	android:orientation="horizontal"
 	android:padding="10dp"
+	style="?android:attr/buttonBarStyle"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	
 	<Button 
-		android:text="View Map" 
 		android:id="@+id/view_map" 
-		android:layout_weight="1"
 		android:layout_width="0dip"
-		android:enabled="false"
-		android:layout_height="wrap_content" >
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="@string/button_view_map"
+		style="?android:attr/buttonBarButtonStyle"
+		android:enabled="false" >
 	</Button>
 	
-	<Button 
+	<Button
+		android:id="@+id/group"
 		android:layout_width="0dip" 
 		android:layout_height="wrap_content" 
 		android:layout_weight="1"
-		android:id="@+id/group" 
-		android:text="Group" 
-		android:enabled="false"
-		android:layout_toRightOf="@+id/ViewMapButtonCLL" >
+		android:text="@string/button_group"
+		style="?android:attr/buttonBarButtonStyle"
+		android:enabled="false" >
 	</Button>
 	
 	<!-- <Button

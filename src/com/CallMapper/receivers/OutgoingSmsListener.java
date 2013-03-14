@@ -12,14 +12,18 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * Listens for outgoing messages and saves them to the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class OutgoingSmsListener extends BroadcastReceiver {
 
 	Context mContext;
 	LocationManager mLocationManager;
 	LocationListener mListener;
 	String mProvider;
-	String mPhoneNumber;
-	String mMessage;
 	
 	static boolean saved = false;
 	
@@ -27,8 +31,8 @@ public class OutgoingSmsListener extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		mContext = context;
         if(intent.getAction().equalsIgnoreCase(Constants.ACTION_SMS_SENT)) {
-        	mPhoneNumber = intent.getStringExtra(Constants.EXTRA_PHONE_NUMBERS);
-			mMessage = intent.getStringExtra(Constants.EXTRA_MESSAGE);
+        	final String phoneNumber = intent.getStringExtra(Constants.EXTRA_PHONE_NUMBERS);
+			final String message = intent.getStringExtra(Constants.EXTRA_MESSAGE);
 			
 			mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             
@@ -59,13 +63,13 @@ public class OutgoingSmsListener extends BroadcastReceiver {
     			
     			@Override
     			public void onLocationChanged(Location location) {
-    				saveToDatabase(mPhoneNumber, mMessage, location.getLatitude(), location.getLongitude());
+    				saveToDatabase(phoneNumber, message, location.getLatitude(), location.getLongitude());
     			}
     		};
             
     		mLocationManager.requestLocationUpdates(mProvider,
-                    60000, // 1min
-                    500,   // 0.5km
+                    Constants.EXTRA_MIN_TIME,
+                    Constants.EXTRA_MIN_DISTANCE,
                     mListener);
         }
 	}

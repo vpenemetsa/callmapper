@@ -3,8 +3,8 @@ package com.CallMapper.database;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,7 +15,12 @@ import android.util.Log;
 import com.CallMapper.Constants;
 import com.CallMapper.entities.Contact;
 
-@SuppressLint("SimpleDateFormat")
+/**
+ * This class contains helper methods for reading and writing into the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class DatabaseControl {
 	static Context mContext;
 		
@@ -24,21 +29,21 @@ public class DatabaseControl {
 	}
 
 	// Adding row to Call Log List
-	public static void addRowCLL(String row0, String row1, String row2, 
+	public static void addRowCLL(String rowId, String phoneNumber, String userName, 
 			double latitude, double longitude) {
 		
 		CustomSQLiteOpenHelper helper = new CustomSQLiteOpenHelper(mContext);
 		SQLiteDatabase pum = helper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put(CustomSQLiteOpenHelper.TABLE_ROW_ID, row0);
-		values.put(CustomSQLiteOpenHelper.TABLE_PHONE_NUMBER, row1);
-		values.put(CustomSQLiteOpenHelper.TABLE_USERNAME, row2);
+		values.put(CustomSQLiteOpenHelper.TABLE_ROW_ID, rowId);
+		values.put(CustomSQLiteOpenHelper.TABLE_PHONE_NUMBER, phoneNumber);
+		values.put(CustomSQLiteOpenHelper.TABLE_USERNAME, userName);
 		values.put(CustomSQLiteOpenHelper.TABLE_LATITUDE, latitude);
 		values.put(CustomSQLiteOpenHelper.TABLE_LONGITUDE, longitude);
 		values.put(CustomSQLiteOpenHelper.TABLE_TYPE, Constants.CALL);
 		
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 	    Date now = new Date();
 	    String date = sdfDate.format(now);
 		
@@ -54,22 +59,22 @@ public class DatabaseControl {
 		pum.close();
 	}
 	
-	public static void addRowTLL(String row0, String row1, String row2, 
+	public static void addRowTLL(String rowId, String phoneNumber, String userName, 
 			double latitude, double longitude, String message) {
 		
 		CustomSQLiteOpenHelper helper = new CustomSQLiteOpenHelper(mContext);
 		SQLiteDatabase pum = helper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put(CustomSQLiteOpenHelper.TABLE_ROW_ID, row0);
-		values.put(CustomSQLiteOpenHelper.TABLE_PHONE_NUMBER, row1);
-		values.put(CustomSQLiteOpenHelper.TABLE_USERNAME, row2);
+		values.put(CustomSQLiteOpenHelper.TABLE_ROW_ID, rowId);
+		values.put(CustomSQLiteOpenHelper.TABLE_PHONE_NUMBER, phoneNumber);
+		values.put(CustomSQLiteOpenHelper.TABLE_USERNAME, userName);
 		values.put(CustomSQLiteOpenHelper.TABLE_LATITUDE, latitude);
 		values.put(CustomSQLiteOpenHelper.TABLE_LONGITUDE, longitude);
 		values.put(CustomSQLiteOpenHelper.TABLE_TYPE, Constants.TEXT);
 		values.put(CustomSQLiteOpenHelper.TABLE_MESSAGE, message);
 		
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 	    Date now = new Date();
 	    String date = sdfDate.format(now);
 		

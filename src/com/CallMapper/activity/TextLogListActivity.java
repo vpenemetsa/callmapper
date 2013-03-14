@@ -19,17 +19,20 @@ import com.CallMapper.adapter.ContactAdapter;
 import com.CallMapper.database.DatabaseControl;
 import com.CallMapper.entities.Contact;
 
-public class TextLogList extends ListActivity implements OnClickListener {
+/**
+ * List activity to display text message list
+ * 
+ * @author vpenemetsa
+ *
+ */
+public class TextLogListActivity extends ListActivity implements OnClickListener {
 	Button mButtonViewMap, mButtonGroup;
-//	, mButtonSelectAll;
+
 	ListView list;
 	static String table_name = "callloglist";
 	static boolean[] selections;
 	ArrayList<Integer> selects = new ArrayList<Integer>();
 	static int checkedCount = 0;
-//	int listlen = DatabaseControl.getNumberOfRows(DatabaseControl.TABLE_NAME_1);
-	
-//	private boolean isSelectedAll = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class TextLogList extends ListActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		
 		list = getListView();
-		View cll = getLayoutInflater().inflate(R.layout.cll, list, false);
+		View cll = getLayoutInflater().inflate(R.layout.list_header, list, false);
 		getListView().addHeaderView(cll, null, true);
 		
 		DatabaseControl dbControl = new DatabaseControl(getApplicationContext());
@@ -116,10 +119,10 @@ public class TextLogList extends ListActivity implements OnClickListener {
 					 phoneNumbers.add(contact.getPhoneNumber());
 				 }
 				 
-				 Intent i5=new Intent(this,GroupBm.class);
-				 i5.putExtra(Constants.EXTRA_GROUP_FLAG, Constants.EXTRA_SAVE_GROUPS);
-				 i5.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phoneNumbers);
-				 startActivity(i5); 
+				 Intent i1=new Intent(this,GroupActivity.class);
+				 i1.putExtra(Constants.EXTRA_GROUP_FLAG, Constants.EXTRA_SAVE_GROUPS);
+				 i1.putStringArrayListExtra(Constants.EXTRA_PHONE_NUMBERS, phoneNumbers);
+				 startActivity(i1); 
 				 break;
 		 
 		

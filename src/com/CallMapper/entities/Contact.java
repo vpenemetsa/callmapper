@@ -1,5 +1,11 @@
 package com.CallMapper.entities;
 
+/**
+ * Data model for Contact entity
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class Contact {
 	private String phoneNumber;
 	

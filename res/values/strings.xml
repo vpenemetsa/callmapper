@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="seconds">Call log</string>
+    <string name="call_log">Call log</string>
     <string name="text_log">Text log</string>
     <string name="app_name">Call Mapper</string>
-<string name="third">Bookmarks</string>
-<string name="hello">Maps!</string>
-<string name="maps">Google Maps!</string>
- <string name="mapskey">YOUR API KEY</string>
-  <string-array name="countries_array">
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-    </string-array>
- 
+    
+    <string name="main_sub_text">View Logs of your calls on a Map!</string>
+    
+    <string name="button_call_history">Call History</string>
+    <string name="button_text_history">Text History</string>
+    <string name="button_groups">Groups</string>
+    
+	<string name="button_view_map">View Map</string>
+	<string name="button_group">Group</string>
+	
+	<string name="button_family">Family</string>
+	<string name="button_friends">Friends</string>
+	<string name="button_work">Work</string>
+	<string name="button_others">Others</string>
+	
+	<string name="maps_api_prod">0bzkcIw5qDMtJCWaYvmdobhz_iKwnLyjUiKELBw</string>
+	<string name="maps_api_dev">0bzkcIw5qDMusYQMIJFBM0c9ws3FkR0hWEhYcxg</string>
 </resources>

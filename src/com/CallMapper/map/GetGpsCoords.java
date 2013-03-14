@@ -12,18 +12,21 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
-
+/**
+ * Service to continously keep track of location changes
+ * 
+ * @author vpenemetsa
+ *
+ */
+@Deprecated
 public class GetGpsCoords extends Service implements LocationListener{
-	//private static final String TAG = "getgpscoords";
-//	private static final int gpsMinTime = 200;
-//    private static final int gpsMinDistance = 0;
-   
+	
     LocationManager locMan;
 	public static double latitude = 65.667634;
 	public static double longitude = 140.894312;
 	public void onCreate()
 	{
-		//
+		
 		locMan = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		
 		final Criteria criteria = new Criteria();
@@ -53,6 +56,8 @@ public class GetGpsCoords extends Service implements LocationListener{
                     longitude = location.getLongitude();
                 }
         }
+        
+        //TODO: Bind service and add helper methods for location retrival
 
 }
 	

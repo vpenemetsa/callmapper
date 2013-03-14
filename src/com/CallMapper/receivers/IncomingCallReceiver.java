@@ -1,7 +1,5 @@
 package com.CallMapper.receivers;
 
-import com.CallMapper.database.DatabaseControl;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +9,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
+import com.CallMapper.Constants;
+import com.CallMapper.database.DatabaseControl;
+
+/**
+ * Listens for incoming calls and saves them to the db
+ * 
+ * @author vpenemetsa
+ *
+ */
 public class IncomingCallReceiver extends BroadcastReceiver {
 	
 	Context mContext;
@@ -28,9 +34,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         	return;
         }
         
-        Log.i("IncomingCallReceiver",bundle.toString());
         String state = bundle.getString(TelephonyManager.EXTRA_STATE);
-        Log.i("IncomingCallReceiver","State: "+ state);
         
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
         	
@@ -70,8 +74,8 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     		};
             
     		mLocationManager.requestLocationUpdates(provider,
-                    60000, // 1min
-                    500,   // 0.5km
+                    Constants.EXTRA_MIN_TIME,
+                    Constants.EXTRA_MIN_DISTANCE,
                     mListener); 
         }
     }

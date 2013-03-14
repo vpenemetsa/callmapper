@@ -8,9 +8,6 @@
 package com.CallMapper;
 
 public final class R {
-    public static final class array {
-        public static final int countries_array=0x7f050000;
-    }
     public static final class attr {
     }
     public static final class drawable {
@@ -24,44 +21,41 @@ public final class R {
         public static final int pink=0x7f020007;
     }
     public static final class id {
-        public static final int GetDirectionsButtonBM=0x7f06000c;
-        public static final int GroupsButtonBM=0x7f060002;
-        public static final int LinearLayout01=0x7f06000b;
-        public static final int RelativeLayout01=0x7f060000;
-        public static final int ViewMapButtonBM=0x7f060001;
-        public static final int ViewMapButtonCLL=0x7f060006;
-        public static final int button_select_all=0x7f060003;
-        public static final int call_logs=0x7f06000e;
-        public static final int checkbox=0x7f060013;
-        public static final int family=0x7f060007;
-        public static final int friends=0x7f060008;
-        public static final int group=0x7f060005;
-        public static final int groups=0x7f060010;
-        public static final int list=0x7f06000d;
-        public static final int mapview=0x7f060011;
-        public static final int number=0x7f060012;
-        public static final int others=0x7f06000a;
-        public static final int text_logs=0x7f06000f;
-        public static final int view_map=0x7f060004;
-        public static final int work=0x7f060009;
+        public static final int RelativeLayout01=0x7f050000;
+        public static final int call_logs=0x7f050008;
+        public static final int family=0x7f050001;
+        public static final int friends=0x7f050002;
+        public static final int group=0x7f050006;
+        public static final int groups=0x7f05000a;
+        public static final int list=0x7f050007;
+        public static final int mapview=0x7f05000b;
+        public static final int others=0x7f050004;
+        public static final int text_logs=0x7f050009;
+        public static final int view_map=0x7f050005;
+        public static final int work=0x7f050003;
     }
     public static final class layout {
-        public static final int bml=0x7f030000;
-        public static final int cll=0x7f030001;
-        public static final int groupsbm=0x7f030002;
-        public static final int header=0x7f030003;
-        public static final int lv=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int map=0x7f030006;
-        public static final int row_call=0x7f030007;
+        public static final int groups=0x7f030000;
+        public static final int list_header=0x7f030001;
+        public static final int list_view=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int map=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040002;
-        public static final int hello=0x7f040004;
-        public static final int maps=0x7f040005;
-        public static final int mapskey=0x7f040006;
-        public static final int seconds=0x7f040000;
+        public static final int button_call_history=0x7f040004;
+        public static final int button_family=0x7f040009;
+        public static final int button_friends=0x7f04000a;
+        public static final int button_group=0x7f040008;
+        public static final int button_groups=0x7f040006;
+        public static final int button_others=0x7f04000c;
+        public static final int button_text_history=0x7f040005;
+        public static final int button_view_map=0x7f040007;
+        public static final int button_work=0x7f04000b;
+        public static final int call_log=0x7f040000;
+        public static final int main_sub_text=0x7f040003;
+        public static final int maps_api_dev=0x7f04000e;
+        public static final int maps_api_prod=0x7f04000d;
         public static final int text_log=0x7f040001;
-        public static final int third=0x7f040003;
     }
 }
