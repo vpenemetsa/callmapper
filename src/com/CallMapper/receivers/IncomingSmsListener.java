@@ -84,10 +84,12 @@ public class IncomingSmsListener extends BroadcastReceiver {
     			}
     		};
             
-    		mLocationManager.requestLocationUpdates(provider,
-                    Constants.EXTRA_MIN_TIME,
-                    Constants.EXTRA_MIN_DISTANCE,
-                    mListener);
+    		if (provider != null) {
+    			mLocationManager.requestLocationUpdates(provider,
+                        Constants.EXTRA_MIN_TIME,
+                        Constants.EXTRA_MIN_DISTANCE,
+                        mListener);
+    		}
         }
 
 	}

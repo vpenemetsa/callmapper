@@ -23,7 +23,6 @@ public class OutgoingSmsListener extends BroadcastReceiver {
 	Context mContext;
 	LocationManager mLocationManager;
 	LocationListener mListener;
-	String mProvider;
 	
 	static boolean saved = false;
 	
@@ -43,7 +42,7 @@ public class OutgoingSmsListener extends BroadcastReceiver {
             criteria.setCostAllowed(true);
             criteria.setPowerRequirement(Criteria.POWER_LOW);
             
-            mProvider = mLocationManager.getBestProvider(criteria, true);
+            String provider = mLocationManager.getBestProvider(criteria, true);
             
             mListener = new LocationListener() {
     			@Override
@@ -67,10 +66,13 @@ public class OutgoingSmsListener extends BroadcastReceiver {
     			}
     		};
             
-    		mLocationManager.requestLocationUpdates(mProvider,
-                    Constants.EXTRA_MIN_TIME,
-                    Constants.EXTRA_MIN_DISTANCE,
-                    mListener);
+    		if (provider != null) {
+    			mLocationManager.requestLocationUpdates(provider,
+                        Constants.EXTRA_MIN_TIME,
+                        Constants.EXTRA_MIN_DISTANCE,
+                        mListener);
+    		}
+    		
         }
 	}
 	
