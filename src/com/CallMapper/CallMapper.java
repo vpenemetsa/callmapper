@@ -18,6 +18,7 @@ import com.CallMapper.activity.CallLogListActivity;
 import com.CallMapper.activity.GroupActivity;
 import com.CallMapper.activity.TextLogListActivity;
 import com.CallMapper.database.CustomSQLiteOpenHelper;
+import com.tjeannin.apprate.AppRate;
 
 /**
  * Base activity. Also contains content observer for outgoing messages.
@@ -34,6 +35,12 @@ public class CallMapper extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        new AppRate(this)
+        	.setShowIfAppHasCrashed(false)
+        	.setMinDaysUntilPrompt(0)
+        	.setMinLaunchesUntilPrompt(5)
+        	.init();
         
         ContentResolver contentRes = getApplicationContext().getContentResolver();
         contentRes.registerContentObserver(Uri.parse(Constants.EXTRA_SMS_URI),true, new SmsSendObserver(new Handler()));
