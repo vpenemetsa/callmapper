@@ -19,8 +19,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:text="@string/button_view_map"
-			style="?android:attr/buttonBarButtonStyle"
-			android:enabled="false" >
+			style="?android:attr/buttonBarButtonStyle" >
 		</Button>
 		
 		<Button
@@ -29,8 +28,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_weight="1"
 			android:text="@string/button_group"
-			style="?android:attr/buttonBarButtonStyle"
-			android:enabled="false" >
+			style="?android:attr/buttonBarButtonStyle" >
 		</Button>
 		
 		<!-- <Button
